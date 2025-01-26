@@ -21,9 +21,6 @@ export const Today = () => {
       </h1>
 
       <div>
-        <h2 className="text-[#282828] text-xl font-semibold mb-4">
-          Today's Todos
-        </h2>
         <List
           dataSource={todos}
           renderItem={(item) => (

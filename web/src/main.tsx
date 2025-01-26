@@ -10,12 +10,12 @@ import { ToastServices } from "./shared/contexts/toast.context.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <GlobalServices>
-      <StorageServices>
-        <ToastServices>
+    <ToastServices>
+      <GlobalServices>
+        <StorageServices>
           <App />
-        </ToastServices>
-      </StorageServices>
-    </GlobalServices>
+        </StorageServices>
+      </GlobalServices>
+    </ToastServices>
   </StrictMode>
 );

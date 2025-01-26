@@ -25,7 +25,7 @@ export const Calendar: React.FC = () => {
 
   return (
     <AntdCalendar
-      dateCellRender={dateCellRender}
+      cellRender={dateCellRender}
       className="bg-white shadow-lg rounded-xl"
     />
   );

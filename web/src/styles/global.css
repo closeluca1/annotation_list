@@ -21,7 +21,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #F2B705;
+  background-color: #04F59D;
   border-radius: 50px;
 }
 
@@ -31,5 +31,13 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  background: #F5ECEC;
+  background: #FFF;
+}
+
+.container {
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
