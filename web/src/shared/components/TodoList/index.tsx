@@ -97,6 +97,7 @@ export const TodoList = ({
           <Checkbox
             checked={item.isFinished}
             onChange={() => toggleTodoStatus(item.id)}
+            // @ts-ignore
             onPointerDown={handleCheckboxPointerDown}
           />
           <div className="w-full ml-2">

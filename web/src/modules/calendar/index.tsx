@@ -7,7 +7,7 @@ export const Calendar: React.FC = () => {
 
   const getListData = (value: Dayjs) => {
     const date = value.format("YYYY-MM-DD");
-    return todos.filter((todo) => todo.dateStart.startsWith(date));
+    return todos.filter((todo) => todo.dateStart?.startsWith(date));
   };
 
   const dateCellRender = (value: Dayjs) => {

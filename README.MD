@@ -12,13 +12,15 @@ Este é um projeto de Todo List implementado com ReactJS, TypeScript, Ant Design
 - Status de Tarefa: Marque tarefas como concluídas e visualize a data de conclusão.
 - Armazenamento Local: Todos os dados são armazenados localmente no navegador com `localStorage`, permitindo persistência mesmo após recarregar a página.
 
-## o que falta adicionar
+## O que falta adicionar
 
 - Página inicial(home).
 - Kanban List.
 - Sistema de grupo e relacionados.
 - Área dinâmica para os lembretes.
 - Filtragem por busca.
+- Corrigir a nomenclatura das rotas.
+- Criar as constantes de cores.
 
 ## Tecnologias Utilizadas
 
