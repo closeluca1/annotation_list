@@ -34,9 +34,19 @@ Este é um projeto de Todo List implementado com ReactJS, TypeScript, Ant Design
 
 # Bugs
 
-- No _Checkbox_ em `web/src/shared/compoents/todayTodoList` o valor de _onPointerDown_ apresenta um erro de tipagem;
+- No _Checkbox_ em `web/src/shared/compoents/TodoList` o valor de _onPointerDown_ apresenta um erro de tipagem;
 
 - Os _inputs_ de Data não estão no formato DD/MM/AAAA;
 
 - ~~Ao criar ou editar uma tarefa os dados da lista retorna todas as tarefas já criadas~~;
 
+- O campo de busca por data em `/lista-de-tareas/hoje` esta muito grande;
+
+- A página online `https://closeluca1.github.io/annotation_list/` não esta carregando algumas vezes, precisa apertar f5(acredito que isso seja pelo githubpages, irei testar no firebas);
+
+
+# Página 
+- https://closeluca1.github.io/annotation_list/
+- https://closeluca1.github.io/annotation_list/hoje
+- https://closeluca1.github.io/annotation_list/calendario
+- https://closeluca1.github.io/annotation_list/lembretes
