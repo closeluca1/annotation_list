@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import { userData } from "./shared/utils/getUserData";
 
