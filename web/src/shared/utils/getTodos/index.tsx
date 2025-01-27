@@ -8,5 +8,7 @@ export const getTodos = (): ITodo[] => {
 
 export const getTodosForDay = (date: string): ITodo[] => {
   const todos = getTodos();
-  return todos.filter((todo) => todo.dateStart?.startsWith(date));
+  return todos
+    .filter((todo) => todo.dateStart?.startsWith(date))
+    .sort((a, b) => (a.orderIndex ?? Infinity) - (b.orderIndex ?? Infinity));
 };

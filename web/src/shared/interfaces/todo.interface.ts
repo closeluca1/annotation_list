@@ -13,6 +13,7 @@ export interface ITodo {
   related: IGroup[];
   createdBy: IUser[];
   createdAt: string;
+  orderIndex?: number;
 }
 
 export type TTodoForm = Omit<ITodo, "id" | "createdAt" | "dateFinished">;

@@ -16,7 +16,8 @@ import { TodoList } from "../../shared/components/TodoList";
 import { StorageService } from "../../shared/contexts/storage.context";
 
 export const Today = () => {
-  const { todos, setTodos } = StorageService();
+  const { todos: allTodos, setTodos: setAllTodos } = StorageService();
+  const [todos, setTodos] = useState<ITodo[]>([]);
   const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
   const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
   const [editingTodo, setEditingTodo] = useState<ITodo | null>(null);
@@ -26,17 +27,30 @@ export const Today = () => {
     const handleDate = chosedDate ? chosedDate : currentDate;
     setTodos(getTodosForDay(handleDate));
     console.log("ok", currentDate, chosedDate);
-  }, [chosedDate]);
+  }, [chosedDate, allTodos]);
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
-    if (active.id !== over.id) {
+
+    if (over && active.id !== over.id) {
       const oldIndex = todos.findIndex((item) => item.id === active.id);
       const newIndex = todos.findIndex((item) => item.id === over.id);
 
       const updatedTodos = arrayMove(todos, oldIndex, newIndex);
-      setTodos(updatedTodos);
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
+
+      const reorderedTodos = updatedTodos.map((todo, index) => ({
+        ...todo,
+        orderIndex: index,
+      }));
+
+      setTodos(reorderedTodos);
+
+      const allUpdatedTodos = allTodos.map(
+        (todo) => reorderedTodos.find((t) => t.id === todo.id) || todo
+      );
+
+      setAllTodos(allUpdatedTodos);
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allUpdatedTodos));
     }
   };
 

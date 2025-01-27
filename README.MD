@@ -14,7 +14,8 @@ Este é um projeto de Todo List implementado com ReactJS, TypeScript, Ant Design
 
 ## o que falta adicionar
 
-- Página inicial.
+- Página inicial(home).
+- Kanban List.
 - Sistema de grupo e relacionados.
 - Área dinâmica para os lembretes.
 - Filtragem por busca.
@@ -35,5 +36,5 @@ Este é um projeto de Todo List implementado com ReactJS, TypeScript, Ant Design
 
 - Os _inputs_ de Data não estão no formato DD/MM/AAAA;
 
-- Ao criar ou editar uma tarefa os dados da lista retorna todas as tarefas já criadas;
+- ~~Ao criar ou editar uma tarefa os dados da lista retorna todas as tarefas já criadas~~;
 
