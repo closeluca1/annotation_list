@@ -33,7 +33,7 @@ Este é um projeto de Todo List implementado com ReactJS, TypeScript, Ant Design
 
 - No _Checkbox_ em `web/src/shared/compoents/todayTodoList` o valor de _onPointerDown_ apresenta um erro de tipagem;
 
-- Os _inputs_ não estão no formato DD/MM/AAAA;
+- Os _inputs_ de Data não estão no formato DD/MM/AAAA;
 
 - Ao criar ou editar uma tarefa os dados da lista retorna todas as tarefas já criadas;
 
