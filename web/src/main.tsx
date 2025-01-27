@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 
-import "./styles/global.css";
 
 import { GlobalServices } from "./shared/contexts/global.context.tsx";
 import { StorageServices } from "./shared/contexts/storage.context.tsx";

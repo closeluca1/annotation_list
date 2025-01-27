@@ -8,10 +8,11 @@ export interface ITodo {
   annotation: string;
   isFinished: boolean;
   priority: Epriority;
-  dateStart: string;
+  dateStart?: string;
   dateFinished: string | null;
   related: IGroup[];
   createdBy: IUser[];
+  createdAt: string;
 }
 
-export type TTodoForm = Omit<ITodo, "id" | "dateStart" | "dateFinished">;
+export type TTodoForm = Omit<ITodo, "id" | "createdAt" | "dateFinished">;

@@ -28,11 +28,8 @@ export const Reminder = () => {
   };
 
   return (
-    <div className="p-6 bg-[#F4F4F4] min-h-screen">
-      <h1 className="text-[#0A0A0A] text-2xl font-bold mb-4">Lembretes</h1>
-
+    <div className="p-6  min-h-screen">
       <div className="mb-8">
-        <h2 className="text-[#282828] text-xl font-semibold mb-4">Lembretes</h2>
         <List
           dataSource={reminders}
           renderItem={(item) => (
@@ -72,7 +69,7 @@ export const Reminder = () => {
 
       <Modal
         title="Edit Reminder"
-        visible={isModalOpen}
+        open={isModalOpen}
         onCancel={closeModal}
         footer={null}
       >

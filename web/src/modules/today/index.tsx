@@ -1,76 +1,115 @@
 import { useState, useEffect } from "react";
+import { List, Button, DatePicker, DatePickerProps } from "antd";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import { LOCAL_STORAGE_KEY } from "../../shared/constants/localStorageKey";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import { ITodo } from "../../shared/interfaces/todo.interface";
-import { Badge, List, Checkbox } from "antd";
-
 import { getTodosForDay } from "../../shared/utils/getTodos";
-import { getCurrentDate } from "../../shared/utils/getCurrentDay";
-import { Epriority } from "../../shared/interfaces/priority.enum";
+import { currentDate } from "../../shared/utils/getCurrentDay";
+import { TodoUpdateForm } from "../../shared/components/todoUpdateForm";
+import { TodoForm } from "../../shared/components/todoForm";
+import { TodoList } from "../../shared/components/TodoList";
+import { StorageService } from "../../shared/contexts/storage.context";
 
 export const Today = () => {
-  const [todos, setTodos] = useState<ITodo[]>([]);
+  const { todos, setTodos } = StorageService();
+  const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
+  const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
+  const [editingTodo, setEditingTodo] = useState<ITodo | null>(null);
+  const [chosedDate, setChosedDate] = useState<string | null>(null);
 
   useEffect(() => {
-    const currentDate = getCurrentDate();
-    setTodos(getTodosForDay(currentDate));
-  }, []);
+    const handleDate = chosedDate ? chosedDate : currentDate;
+    setTodos(getTodosForDay(handleDate));
+    console.log("ok", currentDate, chosedDate);
+  }, [chosedDate]);
+
+  const handleDragEnd = (event: any) => {
+    const { active, over } = event;
+    if (active.id !== over.id) {
+      const oldIndex = todos.findIndex((item) => item.id === active.id);
+      const newIndex = todos.findIndex((item) => item.id === over.id);
+
+      const updatedTodos = arrayMove(todos, oldIndex, newIndex);
+      setTodos(updatedTodos);
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
+    }
+  };
+
+  const toggleTodoStatus = (id: string) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id
+        ? {
+            ...todo,
+            isFinished: !todo.isFinished,
+            dateFinished: !todo.isFinished ? new Date().toISOString() : null,
+          }
+        : todo
+    );
+    setTodos(updatedTodos);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedTodos));
+  };
+
+  const handleEditTodo = (todo: ITodo) => {
+    setEditingTodo(todo);
+    setIsUpdateModalVisible(true);
+  };
+
+  const onChange: DatePickerProps["onChange"] = (_date, dateString) => {
+    setChosedDate(Array.isArray(dateString) ? dateString[0] : dateString);
+  };
 
   return (
-    <div className="p-6 bg-[#F4F4F4] min-h-screen">
+    <div className="p-6 min-h-screen">
       <h1 className="text-[#0A0A0A] text-2xl font-bold mb-4">
-        Lista de tarefas
-      </h1>
-
-      <div>
-        <List
-          dataSource={todos}
-          renderItem={(item) => (
-            <List.Item className="bg-[#FFF] shadow rounded p-4 mb-2">
-              <div className="flex justify-between items-center">
-                <div>
-                  <h3 className="text-[#0A0A0A] text-lg font-semibold">
-                    {item.todo}
-                  </h3>
-                  <Badge
-                    color={
-                      item.priority === Epriority.LOW
-                        ? "#48E4A2"
-                        : item.priority === Epriority.MEDIUM
-                        ? "#FFB74D"
-                        : item.priority === Epriority.NEUTRAL
-                        ? "#919191"
-                        : "#FF5A5A"
-                    }
-                    text={item.priority.toUpperCase()}
-                  />
-                </div>
-                <Checkbox
-                  checked={item.isFinished}
-                  onChange={() => {
-                    const updatedTodos = todos.map((todo) =>
-                      todo.id === item.id
-                        ? {
-                            ...todo,
-                            isFinished: !todo.isFinished,
-                            dateFinished: !todo.isFinished
-                              ? new Date().toISOString()
-                              : null,
-                          }
-                        : todo
-                    );
-                    setTodos(updatedTodos);
-                    localStorage.setItem(
-                      "annotation_list",
-                      JSON.stringify(updatedTodos)
-                    );
-                  }}
-                >
-                  Done
-                </Checkbox>
-              </div>
-            </List.Item>
-          )}
+        Lista de Tarefas -
+        <DatePicker
+          placeholder="Data de início"
+          className="w-full h-[50px] mr-4"
+          format="YYYY-MM-DD"
+          onChange={onChange}
         />
+      </h1>
+      <div className="mb-8 flex gap-2">
+        <Button type="primary" onClick={() => setIsCreateModalVisible(true)}>
+          Adicionar nova tarefa
+        </Button>
       </div>
+
+      <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext
+          items={todos.map((item) => item.id)}
+          strategy={verticalListSortingStrategy}
+        >
+          <List
+            dataSource={todos}
+            renderItem={(item) => (
+              <TodoList
+                key={item.id}
+                item={item}
+                toggleTodoStatus={toggleTodoStatus}
+                onEdit={handleEditTodo}
+              />
+            )}
+          />
+        </SortableContext>
+      </DndContext>
+
+      <TodoForm
+        visible={isCreateModalVisible}
+        closeForm={() => setIsCreateModalVisible(false)}
+      />
+
+      <TodoUpdateForm
+        visible={isUpdateModalVisible}
+        onClose={() => setIsUpdateModalVisible(false)}
+        editingTodo={editingTodo as ITodo}
+        groups={[]}
+      />
     </div>
   );
 };

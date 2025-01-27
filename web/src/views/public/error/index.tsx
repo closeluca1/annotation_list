@@ -35,7 +35,7 @@ export const Error404 = React.memo(() => {
         <>
           <main
             role="main"
-            className="w-full h-screen bg-primary py-10 px-5 grid  md:grid-cols-12 md:place-items-center"
+            className="w-full h-screen bg-orange-300 py-10 px-5 grid md:grid-cols-12 md:place-items-center"
           >
             <div className="col-span-12 w-full md:max-w-[820px] lg:max-w-[1024px] xl:max-w-[1280px]  px-5  flex flex-col items-center justify-center">
               <span className="text-5xl md:text-8xl text-info font-bold -rotate-12 text-center">
