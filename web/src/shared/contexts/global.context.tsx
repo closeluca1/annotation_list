@@ -30,7 +30,7 @@ export const GlobalServices = React.memo(({ children }: GlobalProvide) => {
     localStorage.setItem(LOCAL_STORAGE_USER_DATA, JSON.stringify(newUserData));
     toast.success("Nome salvo com sucesso");
     setIsModalVisible(false);
-    window.location.replace("/lista-de-tarefas/hoje");
+    window.location.replace("/annotation_list/#/lista-de-tarefas/hoje");
   };
 
   return (
