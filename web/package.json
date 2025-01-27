@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "commonjs",
+  "homepage": "https://closeluca1.github.io/annotation_list",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

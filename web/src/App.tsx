@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as HashRouter, Routes, Route } from "react-router-dom";
 
 import { userData } from "./shared/utils/getUserData";
 
@@ -30,7 +30,7 @@ export const App = () => {
   }, []);
 
   return (
-    <Router>
+    <HashRouter>
       <ScrollToTop />
       <Routes>
         <Route path="*" element={<Error404 />} />
@@ -50,7 +50,7 @@ export const App = () => {
           </>
         )}
       </Routes>
-    </Router>
+    </HashRouter>
   );
 };
 
